@@ -11,6 +11,9 @@ import hexGame.util.Coord;
  * 		getPlayer() != null 
  *		isFreeTile(getNextMoveAI())
  * 		isFinished() <=> Il existe un unique PlayerId p tel que hasPlayerWon(p)
+ * 		isEmpty() <=>
+ * 			forall Coord c : (0, 0) .. (getSize() - 1, getSize() - 1) : 
+ * 				isFreeTile(c)
  * 		getPositions(p) != null
  * </pre>
  * 		
@@ -20,10 +23,10 @@ import hexGame.util.Coord;
  * 		$PRE$ /
  * 		$POST$ <pre>
  * 			getSize() == MAX_SIZE_BOARD
- * 			forall Coord c : (0, 0) .. (getSize() - 1, getSize() - 1) : 
- * 				isFreeTile(c)</pre>
+ * 			getPlayer() == PlayerId.values()[0]
+ * 			isEmpty()</pre>
  */
-public interface HexModel {
+public interface HexModel extends ObservableModel {
 	// ATTRIBUTS
 	
 	/**
@@ -67,6 +70,11 @@ public interface HexModel {
 	boolean isFinished();
 	
 	/**
+	 * Renvoie vrai si le plateau est vide.
+	 */
+	boolean isEmpty();
+	
+	/**
 	 * Teste si le joueur p a gagne la partie.
 	 * @pre <pre>
 	 * 		p != null</pre>
@@ -74,7 +82,7 @@ public interface HexModel {
 	boolean hasPlayerWon(PlayerId p);
 	
 	/**
-	 * Renvoie la liste des coordonnées où joueur a des pièces.
+	 * Renvoie la liste des coordonnées où le joueur a des pièces.
 	 * @pre <pre>
 	 * 		p != null</pre>
 	 */
@@ -95,17 +103,17 @@ public interface HexModel {
 	void nextMove(Coord c);
 	
 	/**
-	 * Vide le plateau de jeu.
+	 * Vide le plateau de jeu et donne le tour au joueur PlayerId.values()[0].
 	 * @post <pre>
-	 * 		forall Coord c : (0, 0) .. (getSize() - 1, getSize() - 1) : 
- * 				isFreeTile(c)</pre>
+	 * 		isEmpty()</pre>
 	 */
 	void reset();
 	
 	/**
 	 * Défini la nouvelle taille du plateau de jeu.
 	 * @pre <pre>
-	 * 		MIN_SIZE_BOARD <= size <= MAX_SIZE_BOARD </pre>
+	 * 		MIN_SIZE_BOARD <= size <= MAX_SIZE_BOARD
+	 * 		isEmpty()</pre>
 	 * @post <pre>
 	 * 		getSize() == size</pre>
 	 */
