@@ -2,7 +2,11 @@ package hexGame.util.language;
 
 import hexGame.util.Contract;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class Language implements ILanguage {
@@ -12,12 +16,18 @@ public class Language implements ILanguage {
 	/**
 	 * Table des string correspondant à chaque expression.
 	 */
-	private HashMap<ExpressionLanguage, String> expression;
+	private Map<ExpressionLanguage, String> expression;
+	
+	/**
+	 * Le langage représenté.
+	 */
 	private SupportedLanguage language;
+	
 	// CONSTRUCTEUR
 	
 	/**
 	 * Un language initialisé avec les commandes de l.getFile().
+	 * @throws IOException 
 	 * @pre
 	 * 		l != null
 	 * @post
@@ -28,7 +38,7 @@ public class Language implements ILanguage {
 	 *				avec chacun une ligne de l.getFile())
 	 *		getLanguage() == l
 	 */
-	public Language(SupportedLanguage l) {
+	public Language(SupportedLanguage l) throws IOException {
 		Contract.checkCondition(l != null, "L'argument est invalide.");
 		
 		language = l;
@@ -47,7 +57,7 @@ public class Language implements ILanguage {
 	}
 	// COMMANDES
 	
-	public void changeLanguage(SupportedLanguage l) {
+	public void changeLanguage(SupportedLanguage l) throws IOException {
 		Contract.checkCondition(l != null, "L'argument est invalide.");
 		
 		loading();
@@ -55,24 +65,31 @@ public class Language implements ILanguage {
 	
 	// OUTILS
 	
-	private void loading() {
-		// VERIFICATION DU NOMBRE DE LIGNE
-		// BOUCLE : tant que ligne
-			// LECTURE DUNE LIGNE
-			// ASSOCIATION A LA PREMIERE EXPRESSION
-		
-		// SI ECHEC QUELCONQUE LANCER initialisation()
+	/**
+	 * @throws IOException
+	 */
+	private void loading() throws IOException {
+		expression.clear();
+		BufferedReader fluxIn = new BufferedReader(
+				new FileReader(getLanguage().getFile()));
+		try {
+			String str = fluxIn.readLine();
+			while (str != null) {
+				int begin = str.indexOf(" ");
+				expression.put(ExpressionLanguage.getExpression(
+						//shortcut
+						str.substring(0, begin)),
+						//expression
+						str.substring(begin + 1));
+				str = fluxIn.readLine();
+			}
+		} finally {
+			fluxIn.close();
+		}
+		for (ExpressionLanguage expr : ExpressionLanguage.values()) {
+			if (!expression.containsKey(expr)) {
+				expression.put(expr, UNDEFINED_EXPRESSION);
+			}
+		}
 	}
-	
-	private void initialisation() {
-		// CREATION DU FICHIER
-		// BOUCLE : pour chaque expression
-			// DEMANDE A LUTILISATEUR LE STRING CORRESPONDANT
-			// INSCRIPTION DANS LE FICHIER
-			// ASSOCIATION DANS LA MAP
-		
-		// SI ECHEC REMONTER L'EXCEPTION
-	}
-	
-
 }

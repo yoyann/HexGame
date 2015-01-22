@@ -1,5 +1,7 @@
 package hexGame.util.language;
 
+import java.io.IOException;
+
 /**
  * Un Ilanguage est un objet contenant la totalité des expressions 
  * linguistiques.
@@ -23,6 +25,13 @@ public interface ILanguage {
 	// ATTRIBUTS
 	
 	/**
+	 * Le message par défaut pour tout expression non renseigné.
+	 */
+	static final String UNDEFINED_EXPRESSION = "Undefined expression";
+	
+	// REQUETES
+	
+	/**
 	 * Le texte associé à l'expression expr dans le langage.
 	 * @pre
 	 * 		expr != null
@@ -33,6 +42,7 @@ public interface ILanguage {
 	
 	/**
 	 * Change le language utilisé.
+	 * @throws IOException 
 	 * @pre
 	 * 		l != null
 	 * @post
@@ -43,5 +53,5 @@ public interface ILanguage {
 	 *				avec chacun une ligne de l.getFile())
 	 *			getLanguage() == l
 	 */
-	void changeLanguage(SupportedLanguage l);
+	void changeLanguage(SupportedLanguage l) throws IOException;
 }
