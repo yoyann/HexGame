@@ -1,0 +1,35 @@
+Voisin sur une plage de bit repr�sentant un plateau r�pr�sent� ainsi :
+Liste <- Liste vide
+for x from A ... size - 1
+	for y from 1 ... size - 1 
+		Liste :: tab[x][y]
+	fin
+fin
+
+
+
+Trouver les voisins de la coordonn�e a,b
+Soit c sa position dans liste.
+	c = a * size + b
+Ses 6 voisins sont (si la coordonn�e est valide) :
+	c + 1
+	c - 1
+	c - size
+	c + size
+	c + size - 1
+	c - size + 1
+
+
+
+Options pens�es :
+	Option num�ro du coup
+		Changer taille plateau (taille min, taille max)
+	PVP (A coder en premier), PVE, EVE
+	Diff�rentes formes de plateau
+	Temps de jeu par personne (comme les �checs)
+	Changement des th�mes
+	Changement des noms de joueurs
+	
+Test pour git2
+
+Test
