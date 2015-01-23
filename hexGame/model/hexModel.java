@@ -17,16 +17,18 @@ import hexGame.util.Coord;
  * 		getPositions(p) != null
  * </pre>
  * 		
- * @cons
+ * @cons <pre>
  * 		Construit un modele representant un jeu de hex fournit avec une IA.
  * 		$ARGS$ /
  * 		$PRE$ /
- * 		$POST$ <pre>
+ * 		$POST$ 
  * 			getSize() == MAX_SIZE_BOARD
  * 			getPlayer() == PlayerId.values()[0]
- * 			isEmpty()</pre>
+ * 			isEmpty()
+ * </pre>
  */
 public interface HexModel extends ObservableModel {
+	
 	// ATTRIBUTS
 	
 	/**
@@ -43,7 +45,8 @@ public interface HexModel extends ObservableModel {
 	/**
 	 * Calcule le prochain mouvement que jouerait l'IA et le renvoie.
 	 * @pre <pre>
-	 * 		!isFinished()</pre>
+	 * 		!isFinished()
+	 * </pre>
 	 */
 	Coord getNextMoveAI();
 	
@@ -60,7 +63,8 @@ public interface HexModel extends ObservableModel {
 	/**
 	 * Teste si la case en c est vide.
 	 * @pre <pre>
-	 * 		c != null</pre>
+	 * 		c != null
+	 * </pre>
 	 */
 	boolean isFreeTile(Coord c);
 	
@@ -77,14 +81,16 @@ public interface HexModel extends ObservableModel {
 	/**
 	 * Teste si le joueur p a gagne la partie.
 	 * @pre <pre>
-	 * 		p != null</pre>
+	 * 		p != null
+	 * </pre>
 	 */
 	boolean hasPlayerWon(PlayerId p);
 	
 	/**
 	 * Renvoie la liste des coordonnées où le joueur a des pièces.
 	 * @pre <pre>
-	 * 		p != null</pre>
+	 * 		p != null
+	 * </pre>
 	 */
 	Set<Coord> getPositions(PlayerId p); 
 	
@@ -95,17 +101,20 @@ public interface HexModel extends ObservableModel {
 	 * @pre <pre>
 	 * 		c != null
 	 * 		isFreeTile(c)
-	 * 		!isFinished()</pre>
+	 * 		!isFinished()
+	 * </pre>
 	 * @post <pre>
 	 * 		getPlayer() != old getPlayer()
-	 * 		c in getPositions(old getPlayer())</pre>
+	 * 		c in getPositions(old getPlayer())
+	 * </pre>
 	 */
 	void nextMove(Coord c);
 	
 	/**
 	 * Vide le plateau de jeu et donne le tour au joueur PlayerId.values()[0].
 	 * @post <pre>
-	 * 		isEmpty()</pre>
+	 * 		isEmpty()
+	 * </pre>
 	 */
 	void reset();
 	
@@ -113,9 +122,11 @@ public interface HexModel extends ObservableModel {
 	 * Défini la nouvelle taille du plateau de jeu.
 	 * @pre <pre>
 	 * 		MIN_SIZE_BOARD <= size <= MAX_SIZE_BOARD
-	 * 		isEmpty()</pre>
+	 * 		isEmpty()
+	 * </pre>
 	 * @post <pre>
-	 * 		getSize() == size</pre>
+	 * 		getSize() == size
+	 * </pre>
 	 */
 	void setSize(int size);
 }

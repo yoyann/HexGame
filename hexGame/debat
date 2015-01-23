@@ -1,0 +1,6 @@
+	
+setNextMove(getNextMoveAI())   vs   nextMoveAI()
+	cf : 
+	Coord getNextMoveAI();
+	void setNextMove(Coord c);
+	void nextMoveAI();

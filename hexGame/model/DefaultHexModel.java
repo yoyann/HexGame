@@ -29,11 +29,6 @@ public class DefaultHexModel implements HexModel {
 	 * L'indice dans les tableaux pour le BitSet de la co-accessibilité.
 	 */
 	private static final int CO_ACC_INDEX = 1;
-	/**
-	 * La taille du tableau devant contenir l'accessibilité et la 
-	 * co-accessibilités.
-	 */
-	private static final int ACC_TAB_SIZE = 3;
 	
 	/**
 	 * Les écouteurs du modèle.
@@ -69,7 +64,8 @@ public class DefaultHexModel implements HexModel {
 	 * @post <pre>
 	 * 		getSize() == MAX_SIZE_BOARD
 	 * 		getPlayer() == PlayerId.values()[0]
-	 * 		isEmpty()</pre>
+	 * 		isEmpty()
+	 * </pre>
 	 */
 	public DefaultHexModel() {
 		event = null;
@@ -90,7 +86,8 @@ public class DefaultHexModel implements HexModel {
 	/**
 	 * Calcule le prochain mouvement que jouerait l'IA et le renvoie.
 	 * @pre <pre>
-	 * 		!isFinished()</pre>
+	 * 		!isFinished()
+	 * </pre>
 	 */
 	public Coord getNextMoveAI() {
 		Contract.checkCondition(!isFinished(),
@@ -118,7 +115,8 @@ public class DefaultHexModel implements HexModel {
 	 * @pre <pre>
 	 * 		c != null
 	 * 		0 <= c.getX() < getSize()
-	 * 		0 <= c.getY() < getSize()</pre>
+	 * 		0 <= c.getY() < getSize()
+	 * </pre>
 	 */
 	public boolean isFreeTile(Coord c) {
 		Contract.checkCondition(c != null,
@@ -162,7 +160,8 @@ public class DefaultHexModel implements HexModel {
 	/**
 	 * Teste si le joueur p a gagne la partie.
 	 * @pre <pre>
-	 * 		p != null</pre>
+	 * 		p != null
+	 * </pre>
 	 */
 	public boolean hasPlayerWon(PlayerId p) {
 		Contract.checkCondition(p != null,
@@ -176,7 +175,8 @@ public class DefaultHexModel implements HexModel {
 	/**
 	 * Renvoie la liste des coordonnées où le joueur a des pièces.
 	 * @pre <pre>
-	 * 		p != null</pre>
+	 * 		p != null
+	 * </pre>
 	 */
 	public Set<Coord> getPositions(PlayerId p) {
 		Contract.checkCondition(p != null,
@@ -196,7 +196,8 @@ public class DefaultHexModel implements HexModel {
 	/**
 	 * Ajoute un ChangeListener ecoutant le modele.
 	 * @pre <pre>
-	 * 		cL != null</pre>
+	 * 		cL != null
+	 * </pre>
 	 */
 	public void addChangeListener(ChangeListener cL) {
 		Contract.checkCondition(cL != null, "Reference vide vers cL.");
@@ -207,7 +208,8 @@ public class DefaultHexModel implements HexModel {
 	/**
 	 * Retire un ChangeListener ecoutant le modele.
 	 * @pre <pre>
-	 * 		cL != null</pre>
+	 * 		cL != null
+	 * </pre>
 	 */
 	public void removeChangeListener(ChangeListener cL) {
 		Contract.checkCondition(cL != null, "Reference vide vers cL.");
@@ -222,10 +224,12 @@ public class DefaultHexModel implements HexModel {
 	 * 		0 <= c.getX() < getSize()
 	 * 		0 <= c.getY() < getSize()
 	 * 		isFreeTile(c)
-	 * 		!isFinished()</pre>
+	 * 		!isFinished()
+	 * </pre>
 	 * @post <pre>
 	 * 		getPlayer() != old getPlayer()
-	 * 		c in getPositions(old getPlayer())</pre>
+	 * 		c in getPositions(old getPlayer())
+	 * </pre>
 	 */
 	public void nextMove(Coord c) {
 		Contract.checkCondition(c != null,
