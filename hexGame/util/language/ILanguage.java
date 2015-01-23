@@ -5,7 +5,7 @@ import java.io.IOException;
 /**
  * Un Ilanguage est un objet contenant la totalité des expressions 
  * linguistiques.
- * @cons
+ * @cons <pre>
  * 		$DESC$
  * 			Un language initialisé avec les commandes de l.getFile()
  * 		$ARGS$
@@ -19,6 +19,7 @@ import java.io.IOException;
  *				(Toutes les expressions d'expressionLanguage ont été initialisé 
  *					avec chacun une ligne de l.getFile())
  *			getLanguage() == l
+ * </pre>
  */
 public interface ILanguage {
 	
@@ -33,8 +34,9 @@ public interface ILanguage {
 	
 	/**
 	 * Le texte associé à l'expression expr dans le langage.
-	 * @pre
+	 * @pre <pre>
 	 * 		expr != null
+	 * </pre>
 	 */
 	String getText(ExpressionLanguage expr);
 	
@@ -43,15 +45,17 @@ public interface ILanguage {
 	/**
 	 * Change le language utilisé.
 	 * @throws IOException 
-	 * @pre
+	 * @pre <pre>
 	 * 		l != null
-	 * @post
+	 * </pre>
+	 * @post <pre>
 	 * 		for all ExpressionLanguage.values() : e
 	 *			getText(e) != null
 	 *			getText(e) est une ligne du fichier l.getFile()	 
 	 *			(Toutes les expressions d'expressionLanguage ont été initialisé 
 	 *				avec chacun une ligne de l.getFile())
 	 *			getLanguage() == l
+	 * </pre>
 	 */
 	void changeLanguage(SupportedLanguage l) throws IOException;
 }

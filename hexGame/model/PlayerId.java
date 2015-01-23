@@ -6,7 +6,7 @@ import java.awt.Color;
 
 /**
  * Des Ids de joueur. 
- * @inv
+ * @inv <pre>
  * 		getDefaultName() != null
  * 		getDefaultColor() != null
  * 		getDefaultName().length > 0
@@ -14,6 +14,7 @@ import java.awt.Color;
  * 			id1.getDefaultName() == id2.getDefaultName()
  * 			|| id1.getDefaultColor() == id2.getDefaultColor() 
  * 					==> id1 == id2
+ * </pre>
  */
 public enum PlayerId {
 	PLAYER1("Blanc", Color.WHITE),

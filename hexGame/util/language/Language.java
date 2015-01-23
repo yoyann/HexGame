@@ -3,6 +3,7 @@ package hexGame.util.language;
 import hexGame.util.Contract;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -28,19 +29,21 @@ public class Language implements ILanguage {
 	/**
 	 * Un language initialisé avec les commandes de l.getFile().
 	 * @throws IOException 
-	 * @pre
+	 * @pre <pre>
 	 * 		l != null
-	 * @post
+	 * </pre>
+	 * @post <pre>
 	 * 		for all ExpressionLanguage.values() : e
 	 * 			getText(e) != null
 	 * 			getText(e) est une ligne du fichier l.getFile()	 
 	 *			(Toutes les expressions d'expressionLanguage ont été initialisé 
 	 *				avec chacun une ligne de l.getFile())
 	 *		getLanguage() == l
+	 * </pre>
 	 */
 	public Language(SupportedLanguage l) throws IOException {
 		Contract.checkCondition(l != null, "L'argument est invalide.");
-		
+		expression = new HashMap<ExpressionLanguage, String>();
 		language = l;
 		loading();
 	}
@@ -66,9 +69,18 @@ public class Language implements ILanguage {
 	// OUTILS
 	
 	/**
-	 * @throws IOException
+	 * Charge à partir du getLanguage.getFile() les String 
+	 * correspondant à chaque expression.
+	 * Toutes les lignes n'ayant pu être initialisé grace au fichier sont 
+	 * initialisé avec UNDEFINED_EXPRESSION.
+	 * @throws FileNotFoundException <pre>
+	 * 		Le fichier contenant les expressions est inaccessibles.
+	 * </pre>
+	 * @throws IOException <pre>
+	 * 		La lecture du fichier a avorté.
+	 * </pre>
 	 */
-	private void loading() throws IOException {
+	private void loading() throws FileNotFoundException, IOException {
 		expression.clear();
 		BufferedReader fluxIn = new BufferedReader(
 				new FileReader(getLanguage().getFile()));
@@ -76,12 +88,12 @@ public class Language implements ILanguage {
 			String str = fluxIn.readLine();
 			while (str != null) {
 				int begin = str.indexOf(" ");
-				expression.put(ExpressionLanguage.getExpression(
-						//shortcut
-						str.substring(0, begin)),
-						//expression
-						str.substring(begin + 1));
-				str = fluxIn.readLine();
+				ExpressionLanguage expr = ExpressionLanguage.getExpression(
+						str.substring(0, begin));
+				if (expr != null) {
+					expression.put(expr, str.substring(begin + 1));
+					str = fluxIn.readLine();
+				} 
 			}
 		} finally {
 			fluxIn.close();

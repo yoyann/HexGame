@@ -6,7 +6,7 @@ import hexGame.util.Contract;
  * Une representation des coordonnees par une suite de caracteres 
  * suivis d'un entier les caracteres representant 
  * l'abscisse et l'entier l'ordonnee.
- * @inv
+ * @inv <pre>
  * 		getX() >= 0
  * 		getY() >= 0
  * 		toAbstractX() == an + ... + a0 (ai char)
@@ -23,8 +23,10 @@ import hexGame.util.Contract;
  * 					c.translate(xVect, yVect, nbVect).getY() == newY
  * 		c1.equals(c2) <==> c2 != null && c1.getClass() == c2.getClass() 
  *							&& c1.x == c2.x && c1.y == c2.y;
- * @pre
+ * </pre>
+ * @pre <pre>
  * 		ALPHABET_SIZE >= 1
+ * </pre>
  */
 public class Coord {
 	
@@ -34,18 +36,22 @@ public class Coord {
 	 * Constante definissant la premiere lettre.
 	 */
 	public static final char FIRST_CHAR = 'A';
+	
 	/**
 	 * Constante definissant la taille de l'alphabet.
 	 */
 	public static final int ALPHABET_SIZE = 26;
+	
 	/**
 	 * Constante definissant l'entier de depart.
 	 */
 	public static final int FIRST_INT = 1;
+	
 	/**
 	 * Abscisse.
 	 */
 	private final int x;
+	
 	/**
 	 * Ordonnee.
 	 */
@@ -55,33 +61,38 @@ public class Coord {
 	
 	/**
 	 * Une coordonnée.
-	 * @pre
+	 * @pre <pre>
 	 * 		x >= 0
 	 * 		y >= 0
-	 * @post
+	 * </pre>
+	 * @post <pre>
 	 * 		getX() == x
 	 * 		getY() == y
+	 * </pre>
 	 */
 	public Coord(int x, int y) {
 		Contract.checkCondition(x >= 0, "Le premier parametre definissant "
 				+ "l'abscisse selon un entier est invalide.");
 		Contract.checkCondition(y >= 0, "Le premier parametre definissant "
 				+ "l'abscisse selon un entier est invalide.");
+		
 		this.x = x;
 		this.y = y;
 	}
 	
 	/**
 	 * Une coordonnée.
-	 * @pre
+	 * @pre <pre>
 	 * 		str != null
 	 * 		str.length() > 0
 	 * 		Soit al l'aphabet des lettres comprises entre FIRST_CHAR 
 	 * 		et FIRST_CHAR + ALPHABET_SIZE
 	 * 			forall c in str : c in al
-	 * @post
+	 * </pre>
+	 * @post <pre>
 	 * 		getAbstractX() == str
 	 * 		getAbstractY() == String.valueOf(y)
+	 * </pre>
 	 */
 	public Coord(String str, int y) {
 		Contract.checkCondition((str != null), 
@@ -178,9 +189,10 @@ public class Coord {
 	
 	/**
 	 * Transforme un string str en l'entier qu'il represente d'après l'alphabet.
-	 * @post
+	 * @post <pre>
 	 * 		soit an + ... + a0 (ai char) = str
 	 * 		toInt(str) == somme(ai * ALPHABET_SIZE ^ i)
+	 * </pre>
 	 */
 	private static int toInt(String str) {
 		int resultat = 0;

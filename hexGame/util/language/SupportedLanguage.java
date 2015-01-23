@@ -5,8 +5,9 @@ import java.io.File;
 
 /**
  * Les langages supportés par l'appli.
- * @inv
+ * @inv <pre>
  *		getFile() != null
+ * </pre>
  */
 public enum SupportedLanguage {
 	FRANCAIS("francais.lang"),
@@ -23,10 +24,12 @@ public enum SupportedLanguage {
 	
 	/**
 	 * Un langage supporté.
-	 * @pre
-	 * 		fileName != null
-	 * @post
+	 * @pre <pre>
+	 * 		fileName != null 
+	 * </pre>
+	 * @post <pre>
 	 * 		getFile().getName() == fileName
+	 * </pre>
 	 */
 	private SupportedLanguage(String fileName) {
 		Contract.checkCondition(fileName != null, 

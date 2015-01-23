@@ -8,7 +8,7 @@ import hexGame.util.Contract;
 /**
  * Une énumération des différentes expressions de la vue ainsi que le raccourci 
  * les représentant.
- * @inv
+ * @inv <pre>
  * 		getShortCut() != null
  * 		getExpression(getShortCut()) == this
  * 		soit liste <- ExpressionLanguage.values()
@@ -18,11 +18,15 @@ import hexGame.util.Contract;
  * 			getExpression(str) != null ==>
  * 				il existe expr dans liste tel que
  *					expr.getShortCut().equals(str)
+ * </pre>
  */
 public enum ExpressionLanguage {
-	WINDOW_TITLE("wt");
+	WINDOW_TITLE("wt"),
+	WIN_TEXT("wi"),
+	LOSE_TEXT("lo");
 	
 	// ATTRIBUTS
+	
 	/**
 	 * Une map statique permettant de retrouver l'expression correspondant 
 	 * au raccourci.
@@ -41,16 +45,22 @@ public enum ExpressionLanguage {
 	 */
 	private String str;
 	
+	// CONSTRUCTEUR
+	
 	/**
 	 * Une expression.
-	 * @pre
+	 * @pre <pre>
 	 * 		raccourci != null
-	 * @post
+	 * </pre>
+	 * @post <pre>
 	 * 		getShortCut().equals(raccourci)
+	 * </pre>
 	 */
 	private ExpressionLanguage(String raccourci) {
 		str = raccourci;
 	}
+	
+	// REQUETES
 	
 	/**
 	 * Le raccourci des string. 

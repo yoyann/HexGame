@@ -3,11 +3,11 @@ package hexGame.model;
 import java.awt.Color;
 /**
  * La représentation d'un joueur et les préférences de ce dernier. 
- * @inv
+ * @inv <pre>
  * 		getId() != null
  * 		getName() != null
  * 		getName().length() > 0
- * 		getColorPieces() != null
+ * 		getColorPieces() != null </pre>
  */
 public interface Player {
 	
@@ -32,20 +32,24 @@ public interface Player {
 	
 	/**
 	 * Change le nom du joueur.
-	 * @pre
+	 * @pre <pre>
 	 * 		name != null
 	 * 		name.length > 0
-	 * @post
+	 * </pre>
+	 * @post <pre>
 	 * 		getName() == name
+	 * </pre>
 	 */
 	void setName(String name);
 	
 	/**
 	 * Change la coueleur d'un joueur.
-	 * @pre
+	 * @pre <pre>
 	 * 		color != null
-	 * @post
+	 * </pre>
+	 * @post <pre>
 	 * 		getColorPieces() != null
+	 * </pre>
 	 */
 	void setColor(Color color);
 }
